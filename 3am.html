@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>3AM</title>
+  <link rel="stylesheet" href="style.css">
+  <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+<body>
+  <div class="song-title">3AM</div>
+  <div class="toggle-container">
+    Capo:
+    <span id="toggle-button" class="toggle-button">ON</span>
+  </div>
+  
+  <h1 id="intro-title"></h1>
+  <pre id="intro"></pre>
+
+  <h1 id="verse-title"></h1>
+  <pre id="verse"></pre>
+
+  <h1 id="pre-chorus-title"></h1>
+  <pre id="pre-chorus"></pre>
+
+  <h1 id="chorus-title"></h1>
+  <pre id="chorus"></pre>
+
+  <h1 id="happiness-title"></h1>
+  <pre id="happiness"></pre>
+
+  <script>
+    const tabs = {
+      capoOn: {
+        intro: `
+-12-------
+----12----
+-------12-
+----------`,
+        verse: `
+A -----3-----  -5--3-
+E -3-3---0-2-  ---3--`,
+        preChorus: `
+---8----6--  ----------
+--8----6---  ----------
+-5----3----  -3333332--
+-----------  --------5-`,
+        chorus: `
+A ---5-33235---  -7-5-(02)3-
+E -3--------02-  -----------`,
+        happiness: `
+-12----------  -------
+----12-------  -------
+-------12-10-  -\-5-3-
+-------------  -------`,
+        introTitle: "Intro X",
+        verseTitle: "Verse riff III (G-C D-C)",
+        preChorusTitle: "Pre chorus V (D-C)",
+        chorusTitle: "Chorus III (G-D-C)",
+        happinessTitle: "She thinks that happiness X"
+      },
+      capoOff: {
+        intro: `
+-13-------
+----13----
+-------13-
+----------`,
+        verse: `
+A -----4-----  -6--4-
+E -4-4---1-3-  ---4--`,
+        preChorus: `
+---9----7--  ----------
+--9----7---  ----------
+-6----4----  -4444443--
+-----------  --------6-`,
+        chorus: `
+A ---6-44346---  -8-6-(13)4-
+E -4--------13-  -----------`,
+        happiness: `
+-13----------  -------
+----13-------  -------
+-------13-11-  -\-6-4-
+-------------  -------`,
+        introTitle: "Intro XI",
+        verseTitle: "Verse riff I (G#-C# Eb-C#)",
+        preChorusTitle: "Pre chorus VI (Eb-C#)",
+        chorusTitle: "Chorus III (G#-Eb-C#)",
+        happinessTitle: "She thinks that happiness XI"
+      }
+    };
+
+    // Set initial tab content
+    const initialTabs = tabs.capoOff;
+    document.getElementById('intro').textContent = initialTabs.intro.trim() + '\n\n';
+    document.getElementById('verse').textContent = initialTabs.verse.trim() + '\n\n';
+    document.getElementById('pre-chorus').textContent = initialTabs.preChorus.trim() + '\n\n';
+    document.getElementById('chorus').textContent = initialTabs.chorus.trim() + '\n\n';
+    document.getElementById('happiness').textContent = initialTabs.happiness.trim() + '\n\n';
+    document.getElementById('intro-title').textContent = initialTabs.introTitle.trim() + '\n\n';
+    document.getElementById('verse-title').textContent = initialTabs.verseTitle.trim() + '\n\n';
+    document.getElementById('pre-chorus-title').textContent = initialTabs.preChorusTitle.trim() + '\n\n';
+    document.getElementById('chorus-title').textContent = initialTabs.chorusTitle.trim() + '\n\n';
+    document.getElementById('happiness-title').textContent = initialTabs.happinessTitle.trim() + '\n\n';
+
+    document.getElementById('toggle-button').addEventListener('click', function() {
+      var isCapoOn = this.textContent === 'ON';
+      this.textContent = isCapoOn ? 'OFF' : 'ON';
+      const selectedTabs = isCapoOn ? tabs.capoOn : tabs.capoOff;
+
+      // Update each section's tab and titles based on capo status
+      document.getElementById('intro').textContent = selectedTabs.intro.trim() + '\n\n';
+      document.getElementById('verse').textContent = selectedTabs.verse.trim() + '\n\n';
+      document.getElementById('pre-chorus').textContent = selectedTabs.preChorus.trim() + '\n\n';
+      document.getElementById('chorus').textContent = selectedTabs.chorus.trim() + '\n\n';
+      document.getElementById('happiness').textContent = selectedTabs.happiness.trim() + '\n\n';
+
+      // Update the titles
+      document.getElementById('intro-title').textContent = selectedTabs.introTitle.trim() + '\n\n';
+      document.getElementById('verse-title').textContent = selectedTabs.verseTitle.trim() + '\n\n';
+      document.getElementById('pre-chorus-title').textContent = selectedTabs.preChorusTitle.trim() + '\n\n';
+      document.getElementById('chorus-title').textContent = selectedTabs.chorusTitle.trim() + '\n\n';
+      document.getElementById('happiness-title').textContent = selectedTabs.happinessTitle.trim() + '\n\n';
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+/* Common */
+html, body {
+  background-color: black;
+  color: white;
+  padding: 0;
+  margin: 0;
+  zoom: 1.0;
+  overflow: hidden;
+}
+
+/* Song list (index.html) */
+ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+
+.tags {
+  position: absolute;
+  right: 5px;
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  opacity: 1.0 !important;
+}
+
+span {
+  background-color: rgba(125, 125, 125, 0.5);
+}
+
+li {
+  font-size: 33px;
+  position: relative;
+  padding: 3px 0px;
+}
+
+a {
+  display: block;
+  text-decoration: none;
+  color: white;
+  border: 1px solid #777;
+  padding: 0px 0px 0px 15px;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* Song page */
+pre {
+  font-size: 28px;
+  margin: 5px 0px 0px 20px;
+  font-family: monospace;
+}
+
+h1 {
+  font-size: 33px;
+  margin: 5px 0px 0px 0px;
+}
+
+h2 {
+  font-size: 28px;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+.song-title {
+  position: absolute;
+  display: flex;
+  font-size: 40px;
+  right: 5px;
+  top: 5px;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: right;
+}
+
+.toggle-container {
+  position: absolute;
+  top: 80px;
+  right: 0;
+  margin-left: 20px;
+  color: white;
+  font-size: 40px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.toggle-button {
+  padding: 5px;
+  border: 1px solid #777;
+  background-color: rgba(125, 125, 125, 0.25);
+}
