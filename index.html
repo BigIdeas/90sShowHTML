@@ -53,6 +53,15 @@
     <a href="./whats_up.html"><li>What's Up?</li></a>
     <a href="./why_dont_you_get_a_job.html"><li>Why don't u get a job</li></a>
   </ul>
+
+  <script>
+    // Dynamically set grid rows based on number of items
+    const ul = document.querySelector('ul');
+    const itemCount = ul.children.length;
+    const columnCount = 2;
+    const rowCount = Math.ceil(itemCount / columnCount);
+    ul.style.gridTemplateRows = `repeat(${rowCount}, auto)`;
+  </script>
 </body>
 </html>
 
