@@ -21,6 +21,26 @@ D -7777-0000-7777-000024-
 A ----------------12-12- (break for D
 D -5555-0000-7777-------  in on A 7th ft)
   </pre>
+
+  <script>
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    document.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      if (touchEndX - touchStartX > 100) {
+        window.history.back();
+      }
+    }
+  </script>
 </body>
 </html>
 

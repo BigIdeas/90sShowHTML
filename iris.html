@@ -44,6 +44,26 @@ to verse D
 -333-222-333------333-222-------320---
 break then chorus
   </pre>
+
+  <script>
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    document.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      if (touchEndX - touchStartX > 100) {
+        window.history.back();
+      }
+    }
+  </script>
 </body>
 </html>
 

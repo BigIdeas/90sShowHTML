@@ -38,6 +38,26 @@ E -0000-2222------5532- (to chorus)
 A --(5)--(5)------333--
 E -3333-2222-0000----5-
   </pre>
+
+  <script>
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    document.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      if (touchEndX - touchStartX > 100) {
+        window.history.back();
+      }
+    }
+  </script>
 </body>
 </html>
 

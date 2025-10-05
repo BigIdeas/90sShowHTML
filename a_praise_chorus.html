@@ -34,6 +34,26 @@ E ------2222-4444------  with 4-2-0 hits)
 A -0000-/12-12-12-12-0-
 E ---------------------
   </pre>
+
+  <script>
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    document.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      if (touchEndX - touchStartX > 100) {
+        window.history.back();
+      }
+    }
+  </script>
 </body>
 </html>
 

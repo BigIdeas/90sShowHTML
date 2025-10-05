@@ -23,5 +23,25 @@
 -5---------
 ---5-(7)-0- and what it all
   </pre>
+
+  <script>
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    document.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      if (touchEndX - touchStartX > 100) {
+        window.history.back();
+      }
+    }
+  </script>
 </body>
 </html>

@@ -36,6 +36,26 @@ D -------------6-5-5-5--35-33---
   <br/>
   <br/>
   <a href="./all_the_small_things.html"><li>All small things<div class="tags"><span style="color: goldenrod">D</span><span style="color: red">P</span><span style="color: limegreen">S</span></div></li></a>
+
+  <script>
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    document.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      if (touchEndX - touchStartX > 100) {
+        window.history.back();
+      }
+    }
+  </script>
 </body>
 </html>
 
