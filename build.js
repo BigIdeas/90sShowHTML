@@ -49,24 +49,33 @@ function songPageHTML(song) {
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon.svg">
 </head>
 <body>
-  <div class="song-title">${song.displayTitle}</div>
-  <a id="back-btn" href="index.html" onclick="event.preventDefault(); history.back();">&#9664;</a>
+  <div id="header">
+    <a id="back-btn" href="index.html" onclick="event.preventDefault(); history.back();">&#9664;</a>
+    <span id="song-name">${song.title}</span>
+  </div>
   <div id="content">
     ${song.content}
   </div>
   <script>
-    // Auto-fit: scale content to fill viewport without overflow
+    // Move toggle button into header bar (if present)
+    var toggle = document.querySelector('.toggle-container');
+    if (toggle) {
+      toggle.querySelectorAll('br').forEach(function(br) { br.replaceWith(' '); });
+      document.getElementById('header').appendChild(toggle);
+    }
+
+    // Auto-fit: scale content to fill viewport below header
     function autoFit() {
       var c = document.getElementById('content');
+      var h = document.getElementById('header');
       if (!c) return;
       c.style.transform = '';
-      var vh = window.innerHeight;
+      var available = window.innerHeight - (h ? h.offsetHeight : 0);
       var vw = window.innerWidth;
-      // Vertical scale
-      var sy = vh / c.scrollHeight;
-      // Horizontal scale (check pre elements for wide tab lines)
+      var sy = available / c.scrollHeight;
       var maxW = 0;
       c.querySelectorAll('pre').forEach(function(p) {
         if (p.scrollWidth > maxW) maxW = p.scrollWidth;
@@ -80,7 +89,6 @@ function songPageHTML(song) {
     }
     document.addEventListener('DOMContentLoaded', function() {
       autoFit();
-      // Re-run when toggle buttons change content
       var obs = new MutationObserver(autoFit);
       obs.observe(document.getElementById('content'), {
         childList: true, subtree: true, characterData: true
@@ -94,7 +102,6 @@ function songPageHTML(song) {
       if (e.changedTouches[0].screenX - tsx > 100) history.back();
     });
 
-    // Service worker
     if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
   </script>
 </body>
@@ -121,6 +128,7 @@ function indexPageHTML(songs) {
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon.svg">
 </head>
 <body>
   <ul>
@@ -227,14 +235,18 @@ fs.writeFileSync(path.join(DIST_DIR, 'manifest.json'), JSON.stringify({
   display: 'standalone',
   background_color: '#000000',
   theme_color: '#000000',
-  icons: [],
+  icons: [{ src: 'icon.svg', type: 'image/svg+xml', sizes: 'any' }],
 }, null, 2));
+
+// Copy icon
+fs.copyFileSync(path.join(ROOT, 'icon.svg'), path.join(DIST_DIR, 'icon.svg'));
 
 // Generate service worker
 const allFiles = [
   './',
   './style.css',
   './manifest.json',
+  './icon.svg',
   ...songs.map(s => `./${s.filename}`),
 ];
 fs.writeFileSync(path.join(DIST_DIR, 'sw.js'), serviceWorkerJS(allFiles));
