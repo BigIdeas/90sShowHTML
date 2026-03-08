@@ -4,8 +4,25 @@ html, body {
   color: white;
   padding: 0;
   margin: 0;
-  zoom: 1.0;
   overflow: hidden;
+}
+
+/* Back button (song pages) */
+#back-btn {
+  position: fixed;
+  top: 6px;
+  left: 6px;
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 26px;
+  text-decoration: none;
+  z-index: 100;
+  padding: 4px 10px;
+  line-height: 1;
+  border: none;
+}
+
+#back-btn:active {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 /* Song list (index.html) */

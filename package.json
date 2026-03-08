@@ -1,0 +1,7 @@
+{
+  "name": "hlw-songbook",
+  "private": true,
+  "scripts": {
+    "build": "node build.js"
+  }
+}

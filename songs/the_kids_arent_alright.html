@@ -1,0 +1,69 @@
+<!--
+title: The kids aren't alright
+displayTitle: The kids<br/>aren't<br/>alright
+tags: P
+included: true
+-->
+
+<div class="toggle-container" style="top: 160px;">
+    1/2 step<br/>down:
+    <span id="toggle-button" class="toggle-button">ON</span>
+  </div>
+  <h1 id="verse-title"></h1>
+  <pre id="verse"></pre>
+  <h1 id="chorus-title"></h1>
+  <pre id="chorus"></pre>
+
+  <script>
+    const tabs = {
+      standardKey: {
+        verse: `
+(in on 2nd time)
+---------------------
+---------------------
+-----------4444------
+-6666-2222------4444-`,
+        verseTitle: "Verse II (Bb-F#-C#-G#)",
+        chorus: `
+---------------------
+---------------------
+------9999-4444------
+-6666-----------4444-`,
+        chorusTitle: "Chorus VI (Bb-F#-C#-G#)"
+      },
+      halfStepDown: {
+        verse: `
+(in on 2nd time)
+---------------------
+---------------------
+-----------3333------
+-5555-1111------3333-`,
+        verseTitle: "Verse I (A-F-C-G)",
+        chorus: `
+---------------------
+---------------------
+------8888-3333------
+-5555-----------3333-`,
+        chorusTitle: "Chorus V (A-F-C-G)",
+      }
+    };
+
+    // Set initial tab content
+    const initialTabs = tabs.halfStepDown;
+    document.getElementById('verse').textContent = initialTabs.verse.trim() + '\n\n';
+    document.getElementById('chorus').textContent = initialTabs.chorus.trim() + '\n\n';
+    document.getElementById('verse-title').textContent = initialTabs.verseTitle.trim() + '\n\n';
+    document.getElementById('chorus-title').textContent = initialTabs.chorusTitle.trim() + '\n\n';
+
+    document.getElementById('toggle-button').addEventListener('click', function() {
+      var isHalfStepDown = this.textContent === 'ON';
+      this.textContent = isHalfStepDown ? 'OFF' : 'ON';
+      const selectedTabs = isHalfStepDown ? tabs.standardKey : tabs.halfStepDown;
+
+      // Update each section's tab and titles
+      document.getElementById('verse').textContent = selectedTabs.verse.trim() + '\n\n';
+      document.getElementById('chorus').textContent = selectedTabs.chorus.trim() + '\n\n';
+      document.getElementById('verse-title').textContent = selectedTabs.verseTitle.trim() + '\n\n';
+      document.getElementById('chorus-title').textContent = selectedTabs.chorusTitle.trim() + '\n\n';
+    });
+  </script>
