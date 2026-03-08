@@ -155,19 +155,6 @@ function indexPageHTML(songs) {
 ${items}
   </ul>
   <script>
-    // Auto-fit index to viewport
-    (function() {
-      var ul = document.querySelector('ul');
-      var vh = window.innerHeight;
-      var sh = ul.scrollHeight;
-      if (sh > vh) {
-        var s = vh / sh;
-        ul.style.transform = 'scale(' + s + ')';
-        ul.style.transformOrigin = 'top left';
-        ul.style.width = (100 / s) + '%';
-      }
-    })();
-
     if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
   </script>
 </body>

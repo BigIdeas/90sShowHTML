@@ -64,6 +64,7 @@ li {
 
 #back-btn {
   font-size: 28px;
+  font-weight: bold;
   color: rgba(255, 255, 255, 0.5);
   padding: 4px 8px 4px 4px;
   line-height: 1;
