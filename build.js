@@ -157,6 +157,21 @@ function indexPageHTML(songs) {
 ${items}
   </ul>
   <script>
+    (function() {
+      var ul = document.querySelector('ul');
+      if (!ul) return;
+      function fit() {
+        ul.style.transform = '';
+        var s = window.innerHeight / ul.scrollHeight;
+        if (s < 1) {
+          ul.style.transform = 'scale(' + s + ')';
+          ul.style.transformOrigin = 'top left';
+          ul.style.width = (100 / s) + '%';
+        }
+      }
+      fit();
+      window.addEventListener('resize', fit);
+    })();
     if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
   </script>
 </body>

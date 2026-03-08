@@ -31,8 +31,8 @@ ul a {
   overflow: hidden;
 }
 
-ul a.low-priority {
-  opacity: 0.35;
+ul a.low-priority li {
+  color: #555;
 }
 
 .tags {
