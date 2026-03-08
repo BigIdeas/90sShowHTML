@@ -32,6 +32,8 @@ function parseSong(filePath) {
     displayTitle: meta.displayTitle || meta.title || path.basename(filePath, '.html'),
     tags: meta.tags ? meta.tags.split(',') : [],
     included: meta.included !== 'false',
+    toggle: meta.toggle || null,
+    toggleDefault: meta.toggleDefault || 'on',
     content,
     filename: path.basename(filePath),
   };
@@ -40,6 +42,29 @@ function parseSong(filePath) {
 // ── Templates ───────────────────────────────────────────────────────────────
 
 function songPageHTML(song) {
+  // Toggle button HTML for header (only if song has toggle metadata)
+  const toggleHTML = song.toggle
+    ? `<div class="toggle-container">${song.toggle}: <span id="toggle-button" class="toggle-button">${song.toggleDefault === 'on' ? 'ON' : 'OFF'}</span></div>`
+    : '';
+
+  // Toggle JS (only if song has toggle metadata)
+  const toggleJS = song.toggle
+    ? `
+    // Toggle version handling
+    var versions = document.querySelectorAll('.toggle-version');
+    function showVersion(v) {
+      versions.forEach(function(el) {
+        el.style.display = el.dataset.version === v ? '' : 'none';
+      });
+    }
+    showVersion('${song.toggleDefault}');
+    document.getElementById('toggle-button').addEventListener('click', function() {
+      var isOn = this.textContent === 'ON';
+      this.textContent = isOn ? 'OFF' : 'ON';
+      showVersion(isOn ? 'off' : 'on');
+    });`
+    : '';
+
   return `<!DOCTYPE html>
 <html>
 <head>
@@ -53,19 +78,14 @@ function songPageHTML(song) {
 </head>
 <body>
   <div id="header">
-    <a id="back-btn" href="index.html" onclick="event.preventDefault(); history.back();">&#9664;</a>
+    <a id="back-btn" href="index.html" onclick="event.preventDefault(); history.back();">\u2190</a>
     <span id="song-name">${song.title}</span>
+    ${toggleHTML}
   </div>
   <div id="content">
     ${song.content}
   </div>
-  <script>
-    // Move toggle button into header bar (if present)
-    var toggle = document.querySelector('.toggle-container');
-    if (toggle) {
-      toggle.querySelectorAll('br').forEach(function(br) { br.replaceWith(' '); });
-      document.getElementById('header').appendChild(toggle);
-    }
+  <script>${toggleJS}
 
     // Auto-fit: scale content to fill viewport below header
     function autoFit() {
@@ -135,13 +155,9 @@ function indexPageHTML(songs) {
 ${items}
   </ul>
   <script>
-    // Auto-size grid rows
-    var ul = document.querySelector('ul');
-    var cols = 2;
-    ul.style.gridTemplateRows = 'repeat(' + Math.ceil(ul.children.length / cols) + ', auto)';
-
     // Auto-fit index to viewport
     (function() {
+      var ul = document.querySelector('ul');
       var vh = window.innerHeight;
       var sh = ul.scrollHeight;
       if (sh > vh) {

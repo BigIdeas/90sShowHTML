@@ -1,30 +1,21 @@
 <!--
 title: Slide
+toggle: Capo
+toggleDefault: on
 included: true
 -->
 
-<div class="toggle-container">
-    Capo:
-    <span id="toggle-button" class="toggle-button">ON</span>
-  </div>
-  <h1 id="intro-title"></h1>
-  <pre id="intro"></pre>
-
-  <h1 id="verse-title"></h1>
-  <pre id="verse"></pre>
-
-  <h1 id="outro-title"></h1>
-  <pre id="outro"></pre>
-
-  <script>
-    const tabs = {
-      capoOn: {
-        intro: `
+<div class="toggle-version" data-version="on">
+  <h1>Intro IV</h1>
+  <pre>
 ---------------
 ---------------
 -4--4--4h6-4h6-
----------------`,
-        verse: `
+---------------
+  </pre>
+
+  <h1>Verse IV (C#-G#-Eb)</h1>
+  <pre>
 ------------  ---------- (after
 ------------  ----------  "let it
 -44--44--66-  ----66-44-  slide" &
@@ -33,24 +24,30 @@ included: true
 ----------
 ----------
 -44334466-
----------- (what u feel is what u)`,
-        outro: `
+---------- (what u feel is what u)
+  </pre>
+
+  <h1>Outro X</h1>
+  <pre>
 (1-4-2-2-1) (1-4-2-2)
 -10-------------10----------
 ----13-11----------13-11----
 ----------11-10----------11-
-----------------------------`,
-        introTitle: "Intro IV",
-        verseTitle: "Verse IV (C#-G#-Eb)",
-        outroTitle: "Outro X"
-      },
-      capoOff: {
-        intro: `
+----------------------------
+  </pre>
+</div>
+
+<div class="toggle-version" data-version="off">
+  <h1>Intro III</h1>
+  <pre>
 ---------------
 ---------------
 -3--3--3h5-3h5-
----------------`,
-        verse: `
+---------------
+  </pre>
+
+  <h1>Verse III (C-G-D)</h1>
+  <pre>
 ------------  ---------- (after
 ------------  ----------  "let it
 -33--33--55-  ----55-33-  slide" &
@@ -59,41 +56,15 @@ included: true
 ----------
 ----------
 -33223355-
----------- (what u feel is what u)`,
-        outro: `
+---------- (what u feel is what u)
+  </pre>
+
+  <h1>Outro IX</h1>
+  <pre>
 (1-4-2-2-1) (1-4-2-2)
 --9--------------9----------
 ----12-10----------12-10----
 ----------10--9----------10-
-----------------------------`,
-        introTitle: "Intro III",
-        verseTitle: "Verse III (C-G-D)",
-        outroTitle: "Outro IX"
-      }
-    };
-
-    // Set initial tab content
-    const initialTabs = tabs.capoOn;
-    document.getElementById('intro').textContent = initialTabs.intro.trim() + '\n\n';
-    document.getElementById('verse').textContent = initialTabs.verse.trim() + '\n\n';
-    document.getElementById('outro').textContent = initialTabs.outro.trim() + '\n\n';
-    document.getElementById('intro-title').textContent = initialTabs.introTitle.trim() + '\n\n';
-    document.getElementById('verse-title').textContent = initialTabs.verseTitle.trim() + '\n\n';
-    document.getElementById('outro-title').textContent = initialTabs.outroTitle.trim() + '\n\n';
-
-    document.getElementById('toggle-button').addEventListener('click', function() {
-      var isCapoOn = this.textContent === 'ON';
-      this.textContent = isCapoOn ? 'OFF' : 'ON';
-      const selectedTabs = isCapoOn ? tabs.capoOff : tabs.capoOn;
-
-      // Update each section's tab and titles based on capo status
-      document.getElementById('intro').textContent = selectedTabs.intro.trim() + '\n\n';
-      document.getElementById('verse').textContent = selectedTabs.verse.trim() + '\n\n';
-      document.getElementById('outro').textContent = selectedTabs.outro.trim() + '\n\n';
-
-      // Update the titles
-      document.getElementById('intro-title').textContent = selectedTabs.introTitle.trim() + '\n\n';
-      document.getElementById('verse-title').textContent = selectedTabs.verseTitle.trim() + '\n\n';
-      document.getElementById('outro-title').textContent = selectedTabs.outroTitle.trim() + '\n\n';
-    });
-  </script>
+----------------------------
+  </pre>
+</div>
