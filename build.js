@@ -32,6 +32,7 @@ function parseSong(filePath) {
     displayTitle: meta.displayTitle || meta.title || path.basename(filePath, '.html'),
     tags: meta.tags ? meta.tags.split(',') : [],
     included: meta.included !== 'false',
+    priority: meta.priority || null,
     toggle: meta.toggle || null,
     toggleDefault: meta.toggleDefault || 'on',
     content,
@@ -136,7 +137,8 @@ function indexPageHTML(songs) {
           `<span style="color: ${TAG_COLORS[t] || 'white'}">${t}</span>`
         ).join('')}</div>`
       : '';
-    return `    <a href="./${s.filename}"><li>${s.title}${tagsHtml}</li></a>`;
+    const lowClass = s.priority === 'low' ? ' class="low-priority"' : '';
+    return `    <a href="./${s.filename}"${lowClass}><li>${s.title}${tagsHtml}</li></a>`;
   }).join('\n');
 
   return `<!DOCTYPE html>
