@@ -91,10 +91,9 @@ function songPageHTML(song) {
     // Auto-fit: scale content to fill viewport below header
     function autoFit() {
       var c = document.getElementById('content');
-      var h = document.getElementById('header');
       if (!c) return;
       c.style.transform = '';
-      var available = window.innerHeight - (h ? h.offsetHeight : 0);
+      var available = window.innerHeight - c.getBoundingClientRect().top;
       var vw = window.innerWidth;
       var sy = available / c.scrollHeight;
       var maxW = 0;
