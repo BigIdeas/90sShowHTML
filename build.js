@@ -96,11 +96,12 @@ function songPageHTML(song) {
       var available = window.innerHeight - c.getBoundingClientRect().top;
       var vw = window.innerWidth;
       var sy = available / c.scrollHeight;
-      var maxW = 0;
+      var maxR = 0;
       c.querySelectorAll('pre').forEach(function(p) {
-        if (p.scrollWidth > maxW) maxW = p.scrollWidth;
+        var r = p.getBoundingClientRect().left + p.scrollWidth;
+        if (r > maxR) maxR = r;
       });
-      var sx = maxW > vw ? vw / maxW : 1;
+      var sx = maxR > vw ? vw / maxR : 1;
       var s = Math.min(sy, sx, 1);
       if (s < 1) {
         c.style.transform = 'scale(' + s + ')';
