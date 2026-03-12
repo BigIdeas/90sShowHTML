@@ -31,10 +31,6 @@ ul a {
   overflow: hidden;
 }
 
-ul a.low-priority li {
-  color: #555;
-}
-
 .tags {
   position: absolute;
   right: 5px;
