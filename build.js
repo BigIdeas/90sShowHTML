@@ -8,7 +8,7 @@ const SONGS_DIR = path.join(ROOT, 'songs');
 const DIST_DIR = path.join(ROOT, 'dist');
 
 // Tag colors
-const TAG_COLORS = { D: 'goldenrod', P: 'red', S: 'limegreen' };
+const TAG_COLORS = { D: 'goldenrod', P: 'red', S: 'limegreen', Eb: 'deepskyblue' };
 
 // ── Parse song metadata ─────────────────────────────────────────────────────
 
@@ -79,7 +79,7 @@ function songPageHTML(song) {
 <body>
   <div id="header">
     <a id="back-btn" href="index.html" onclick="event.preventDefault(); history.back();">\u2190</a>
-    <span id="song-name">${song.title}</span>
+    <span id="song-name">${song.title}</span>${song.tags.length ? `<div class="tags">${song.tags.map(t => `<span style="color: ${TAG_COLORS[t] || 'white'}">${t}</span>`).join('')}</div>` : ''}
     ${toggleHTML}
   </div>
   <div id="content">

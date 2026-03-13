@@ -87,6 +87,13 @@ li {
   margin-left: 2px;
 }
 
+#header .tags {
+  position: static;
+  height: auto;
+  margin-left: 6px;
+  flex-shrink: 0;
+}
+
 /* Toggle button in header */
 #header .toggle-container {
   position: static;
